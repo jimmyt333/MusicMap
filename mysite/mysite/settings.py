@@ -120,6 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = {
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
-}
+] # Changed from squiggly brackets '{}' to hard brackets '[]' as I was getting an error for CSS for finding the directory

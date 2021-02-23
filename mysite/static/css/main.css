@@ -1,0 +1,51 @@
+.header{ /* Makes webpage title/header look nice! */
+    background-color: white(255, 255, 255);
+    padding: 40px 40px;
+    font-family: "Apple Chancery", cursive;
+    font-size: 60px;
+    text-align: center;
+}
+
+.navbar{ /* Makes navbar as a whole look nice! */
+    list-style-type: none;
+    min-height: 54px;
+    margin: auto;
+    padding: 0px;
+    background-color: rgb(121, 120, 120);
+    box-shadow: 0px 5px 5px rgb(119, 119, 119);
+}
+
+.navbar *{ /* Makes the individual tabs on navbar look nice! */
+    width: 33.3%;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: inherit;
+    font-size: 36px;
+    display: inline-block;
+}
+
+.navbar * a:hover{ /* Changes navbar tab elements colors once mouse hovers over it */
+    background-color: rgb(179, 179, 179);
+    color: gray;
+    animation: colorchange 500ms;
+}
+
+.sidenav { /* Makes sidebar content look nice! */
+    height: fit-content; 
+    width: 33.3%; 
+    position: fixed; 
+    z-index: 1; 
+    top: -1; 
+    right: 0;
+    background-color: rgb(131, 82, 84); /* Black */
+    color: white;
+    overflow-x: hidden; 
+    padding-top: 20px;
+    margin: 20px;
+    text-align: center;
+    border-radius: 10px;
+    border-color: black;
+    border-style: ridge;
+    border-width: 10px;
+}

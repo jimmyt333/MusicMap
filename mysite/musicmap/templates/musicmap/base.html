@@ -7,14 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--import for navbar icons-->
 </head>
 <body>
     <!-- Here you can put the nav bar and side bar html! -->
+    <div class="header">
+        <h1>Music Map (Working Title)</h1>
+    </div>
 
+    <ul class="navbar">
+        <li><a href="">BLOG</a></li>
+        <li><a class="fa fa-home" href="" style="padding: 9px"></a></li>
+        <li><a href="">ABOUT</a></li>
+    </ul>
 
-
-
-
+    <div class="sidenav">
+        <h2 style="text-align: center;">Search For Artist:</h2>
+        <input id="searchText" style="width:50%; margin: 10px;"/> 
+        <br> <br>
+        <h3>Settings/Options</h3>
+        <input id="randomsearch" type="checkbox" />
+        <label for="randomsearch">Surprise Me!</label><br>
+        <input id="nightmode" type="checkbox" />
+        <label for="nightmode">Night Mode</label><br>
+        <input id="autoplay" type="checkbox" />
+        <label for="autoplay">Autoplay</label><br>
+        <button class="btn_applysettings" style="margin-top: 10px;">Apply</button>
+    </div>
 
 
 

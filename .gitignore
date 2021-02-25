@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#credentials json
+# credentials json
 Tokens/credentials.json
+
+# csv test file
+data.csv

@@ -13,27 +13,18 @@
     <!-- Here you can put the nav bar and side bar html! -->
     <div class="header">
         <h1>Music Map (Working Title)</h1>
+        <button style="float: right;"  type="button" class="btn btn-link">Login</button>
+
+        
     </div>
 
     <ul class="navbar">
-        <li><a href="">BLOG</a></li>
-        <li><a class="fa fa-home" href="" style="padding: 9px"></a></li>
-        <li><a href="">ABOUT</a></li>
+        <li><a href="{%url 'blog'%}">BLOG</a></li>
+        <li><a class="fa fa-home" href="{%url 'content'%}" style="padding: 9px"></a></li>
+        <li><a href="{%url 'about'%}">ABOUT</a></li>
     </ul>
 
-    <div class="sidenav">
-        <h2 style="text-align: center;">Search For Artist:</h2>
-        <input id="searchText" style="width:50%; margin: 10px;"/> 
-        <br> <br>
-        <h3>Settings/Options</h3>
-        <input id="randomsearch" type="checkbox" />
-        <label for="randomsearch">Surprise Me!</label><br>
-        <input id="nightmode" type="checkbox" />
-        <label for="nightmode">Night Mode</label><br>
-        <input id="autoplay" type="checkbox" />
-        <label for="autoplay">Autoplay</label><br>
-        <button class="btn_applysettings" style="margin-top: 10px;">Apply</button>
-    </div>
+ 
 
 
 

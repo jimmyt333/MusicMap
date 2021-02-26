@@ -1,0 +1,47 @@
+{%extends "musicmap/base.html"%}
+{%load static%}
+{%block content%}
+
+
+
+<form style="margin: 20px;" class="container" method = "POST" action="/">
+    {%csrf_token%}
+    <label for="title">Title</label>
+    <input id = "title"type="text">
+    <br>
+    <label for="text">Blog</label>
+    <textarea name="" id="text" cols="30" rows="5"></textarea>
+    <input class="btn btn-primary" type="submit" name="submit post" value="Create Post">
+
+
+</form>
+
+
+
+
+
+
+{%for post in posts %}
+
+<div style = "border: 2px solid black;" class="box container">
+
+    {{post.author}}
+    <br>
+    {{post.title}}
+    <br>
+    {{post.content}}
+    <br>
+    {{post.}}
+
+</div>
+{%endfor%}
+
+
+
+
+
+
+
+
+
+{%endblock%}

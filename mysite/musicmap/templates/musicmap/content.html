@@ -1,8 +1,21 @@
+{%extends "musicmap/base.html"%}
 {%load static%}
 {%block content%}
 
 
-
+<div class="sidenav">
+    <h2 style="text-align: center;">Search For Artist:</h2>
+    <input id="searchText" style="width:50%; margin: 10px;"/> 
+    <br> <br>
+    <h3>Settings/Options</h3>
+    <input id="randomsearch" type="checkbox" />
+    <label for="randomsearch">Surprise Me!</label><br>
+    <input id="nightmode" type="checkbox" />
+    <label for="nightmode">Night Mode</label><br>
+    <input id="autoplay" type="checkbox" />
+    <label for="autoplay">Autoplay</label><br>
+    <button class="btn_applysettings" style="margin-top: 10px;">Apply</button>
+</div>
 
 
 

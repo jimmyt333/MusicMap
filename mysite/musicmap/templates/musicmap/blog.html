@@ -4,17 +4,12 @@
 
 
 
-<form style="margin: 20px;" class="container" method = "POST" action="/">
+<form style="margin: 20px;" class="container" method = "POST" action="">
     {%csrf_token%}
-    <label for="title">Title</label>
-    <input id = "title"type="text">
-    <br>
-    <label for="text">Blog</label>
-    <textarea name="" id="text" cols="30" rows="5"></textarea>
-    <input class="btn btn-primary" type="submit" name="submit post" value="Create Post">
-
-
+    {{form}}
+    <input class="btn btn-primary" type="submit" name="submit post" value="Create Post"> 
 </form>
+  
 
 
 
@@ -23,24 +18,20 @@
 
 {%for post in posts %}
 
-<div style = "border: 2px solid black;" class="box container">
+<div style = "border: 2px solid black; margin: 20px;" class="box container">
 
     {{post.author}}
     <br>
     {{post.title}}
     <br>
     {{post.content}}
-    <br>
-    {{post.}}
 
+    <a style = "margin-right: 10px;" class="btn btn-sm btn-primary buttons" href="#">Edit</a>
+    <a style = "margin-right: 10px;" class="btn btn-sm btn-danger buttons" href="#">Delete</a>
+
+    <br>
 </div>
 {%endfor%}
-
-
-
-
-
-
 
 
 

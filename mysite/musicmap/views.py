@@ -14,10 +14,12 @@ def blog_home(request):
     posts = Blog.objects.all()
     form = BlogForm()
     if request.method == 'POST':
+        print("before form is valid")
         if form.is_valid():
+            print('it is coming to the form')
             form.save()
-            return redirect('blog/')
-    context = {'posts': posts}
+        return redirect('/blog/')
+    context = {'posts': posts, 'form':form}
     return render(request, 'musicmap/blog.html', context)
 
 
@@ -30,8 +32,6 @@ def edit_blog(request):
 def delete_blog(request):
 
     pass
-
-
 
 
 def edit_blog(request):

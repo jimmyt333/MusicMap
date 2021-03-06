@@ -54,3 +54,9 @@
 .box{
     border: 10px solid black;
 }
+
+.login{
+    float: right;
+    color: white;
+    margin: 5px;
+}

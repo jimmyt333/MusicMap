@@ -13,8 +13,8 @@
     <!-- Here you can put the nav bar and side bar html! -->
     <div class="header">
         <h1>Music Map (Working Title)</h1>
-        <button style="float: right;"  type="button" class="btn btn-link">Login</button>
-
+        <span class="login">Hello, {{request.user}}</span>
+        <a class = "login"  href="{% url 'logout' %}">Logout</a>
         
     </div>
 

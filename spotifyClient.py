@@ -17,13 +17,17 @@ class SpotifyClient:
 
     # method which takes in the name of a searched artist and returns a dictionary of related artists (to the searched one)
     # Each name (key) is paired with a popularity (value) based on Spotify community
-    def getRelatedArtist(self, searchString):
-        # searches for artist and gets their items/attributes
-        results = self.sp.search(q='artist:' + searchString, type='artist')
+    #
+    # @param searchString is string given to find artist with
+    # @param choice is integer value to represent nth choice of results (starting with 0 as 1st choice)
+    # @return dict of related artists and popularity value
+    def getRelatedArtist(self, searchString, choice):
+        # searches for artist from search results and gets their items/attributes
+        results = self.getSearchResults(searchString)
         items = results['artists']['items']
 
-        # takes first result
-        artist = items[0]
+        # takes nth result
+        artist = items[choice]
         
         # calls Spotify API for related artists
         related_artists = self.sp.artist_related_artists(artist['id'])
@@ -38,3 +42,9 @@ class SpotifyClient:
               '\n\tPopularity Value: ', artist['popularity'])
 
         return names
+
+    # helper function to get overall search results of given search string
+    # could be tweaked to give user options in selecting from search results
+    def getSearchResults(self, searchString):
+        results = self.sp.search(q='artist:' + searchString, type='artist')
+        return results

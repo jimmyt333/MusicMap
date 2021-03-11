@@ -21,7 +21,7 @@ def run():
     spottyClient = SpotifyClient(client_id, client_secret)
 
     # use spotify client object to get related artists (dict)
-    relatedArtists = spottyClient.getRelatedArtist("Drake")
+    relatedArtists = spottyClient.getRelatedArtist("Drake", 0)
 
     # siege_uri = 'spotify:artist:6Cny0Wt5OKLct1rGOLmu80'
     # let user choose artist

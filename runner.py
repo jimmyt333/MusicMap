@@ -4,7 +4,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
 import time
 import json
-
+from spotifyClient import SpotifyClient
 
 # main runner function
 def run():
@@ -17,50 +17,60 @@ def run():
     client_id = keys["client_Id"]
     client_secret = keys["client_secret"]
 
-    client_credentials_manager = SpotifyClientCredentials(
-        client_id, client_secret)
-    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    # create spotifyClient object
+    spottyClient = SpotifyClient(client_id, client_secret)
 
-    ids = getTrackIDs('razgrizstern', '5kwI1PlgREZW45n8MQbihz', sp)
+    # use spotify client object to get related artists (dict)
+    relatedArtists = spottyClient.getRelatedArtist("Drake")
 
-    # print number of IDs
-    print("Number of tracks in playlist: " + str(len(ids)))
+    # siege_uri = 'spotify:artist:6Cny0Wt5OKLct1rGOLmu80'
+    # let user choose artist
 
-    # print ID of each track
-    print("Track IDs of playlist: \n")
-    print(ids)
+    # ids = getTrackIDs('razgrizstern', '5kwI1PlgREZW45n8MQbihz', spottyClient.sp)
 
-    # loop over track ids
+    # TEST CODE: print number of IDs
+    # print("Number of tracks in playlist: " + str(len(ids)))
+
+    # TEST CODE: print ID of each track
+    # print("Track IDs of playlist: \n")
+    # print(ids)
+
+    # TEST CODE: loop over track ids
+
     # tracks = []
     # for i in range(len(ids)):
     #     time.sleep(.5)
     #     track = getTrackFeatures(ids[i], sp)
     #     tracks.append(track)
 
-    # create dataset
+    # TEST CODE: create dataset
+
     # df = pd.DataFrame(tracks, columns=['name', 'album', 'artist', 'release_date', 'length', 'popularity', 'danceability', 'acousticness',
     #                                   'danceability', 'energy', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo', 'time_signature'])
     #df.to_csv("data.csv", sep=',')
 
-    # get album names
-    siege_uri = 'spotify:artist:6Cny0Wt5OKLct1rGOLmu80'
-    results = sp.artist_albums(siege_uri, album_type='album')
-    albums = results['items']
-    while results['next']:
-        results = sp.next(results)
-        albums.extend(results['items'])
+    # TEST CODE: get album names
 
-    print("\nArtist's albums: \n")
-    for album in albums:
-        print(album['name'])
+    # siege_uri = 'spotify:artist:6Cny0Wt5OKLct1rGOLmu80'
+    # results = sp.artist_albums(siege_uri, album_type='album')
+    # albums = results['items']
+    # while results['next']:
+    #     results = sp.next(results)
+    #     albums.extend(results['items'])
 
-    # get related artists
-    related_artists = sp.artist_related_artists(siege_uri)
-    print("\nRelated Artists: \n")
-    for artist in related_artists['artists']:
-        print('Name: ', artist['name'],
-              '\n\tPopularity Value: ', artist['popularity'])
-        #print(' ', artist['popularity'])
+    # print("\nArtist's albums: \n")
+    # for album in albums:
+    #     print(album['name'])
+
+    # TEST CODE: get related artists
+
+    # related_artists = sp.artist_related_artists(siege_uri)
+    # print("\nRelated Artists: \n")
+    # for artist in related_artists['artists']:
+    #     print('Name: ', artist['name'],
+    #           '\n\tPopularity Value: ', artist['popularity'])
+    #     # print(artist)
+    #     #print(' ', artist['popularity'])
 
 # function to retrieve IDs for each track
 

@@ -133,3 +133,6 @@ Tokens/credentials.json
 
 # csv test file
 data.csv
+
+# MacOS Django/Python path settings
+.vscode/settings.json

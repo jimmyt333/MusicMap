@@ -1,3 +1,4 @@
+from musicMap import MusicMap
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -20,8 +21,34 @@ def run():
     # create spotifyClient object
     spottyClient = SpotifyClient(client_id, client_secret)
 
+    # use spotify client object to get top five results (list)
+    # top search results = spottyClient.getTopFiveResults("Drake")
+
     # use spotify client object to get related artists (dict)
-    relatedArtists = spottyClient.getRelatedArtist("Drake", 0)
+    #relatedArtists = spottyClient.getRelatedArtist("Drake", 0)
+
+    # use spotify client object to return MusicMap based on search string
+    musicMap = spottyClient.createMusicMap("Drake")
+
+    print("\nCore Music Profile: ")
+    print("\n\nname: " , musicMap.getCoreProfile().getName())
+    print("\ngenres: ")
+    print(musicMap.getCoreProfile().getGenre())
+    print("\nurl: " , musicMap.getCoreProfile().getURL())
+    print("\nfollowers: ", musicMap.getCoreProfile().getNumFollowers())
+
+    print("\nRelated Artists Music Profiles: ")
+    relationGraph = musicMap.getGraph()
+    for profile in relationGraph.values():
+        print("\nname: " , profile.getName())
+        print("\ngenres: ")
+        print(profile.getGenre())
+        print("\nurl: " , profile.getURL())
+        print("\nfollowers: ", profile.getNumFollowers())
+        print("\n__________________\n")
+        
+
+    #________________________________________________
 
     # siege_uri = 'spotify:artist:6Cny0Wt5OKLct1rGOLmu80'
     # let user choose artist

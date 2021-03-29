@@ -1,5 +1,5 @@
-from musicMap import MusicMap
-from musicProfile import MusicProfile
+from .musicMap import MusicMap
+from .musicProfile import MusicProfile
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials

@@ -9,12 +9,36 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .spotifyClient import SpotifyClient
+import json
+
 
 
 
 # Create your views here.
 
+
 def index(request):
+
+
+    if request.method == "POST":
+        
+
+        # open credentials json and read api keys
+        with open('Tokens/credentials.json') as tokens:
+            keys = json.load(tokens)
+
+        # connect to Spotify API
+        client_id = keys["client_Id"]
+        client_secret = keys["client_secret"]
+
+        # create spotifyClient object
+        spottyClient = SpotifyClient(client_id, client_secret)
+        pass
+
+
+
+
     context = {}
     return render(request, 'musicmap/content.html', context) 
     #Changed html directory from maincontent to base

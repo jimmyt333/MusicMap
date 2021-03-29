@@ -14,18 +14,16 @@ import json
 
 
 
-
 # Create your views here.
-
-
 def index(request):
 
 
     if request.method == "POST":
-        
+
+        searchString = request.POST.get('searchString')
 
         # open credentials json and read api keys
-        with open('Tokens/credentials.json') as tokens:
+        with open('musicmap/Tokens/credentials.json') as tokens:
             keys = json.load(tokens)
 
         # connect to Spotify API
@@ -34,12 +32,28 @@ def index(request):
 
         # create spotifyClient object
         spottyClient = SpotifyClient(client_id, client_secret)
-        pass
 
+        musicMap = spottyClient.createMusicMap(searchString)
+        relationGraph = musicMap.getGraph()
 
+        print("\nCore Music Profile: ")
+        print("\n\nname: " , musicMap.getCoreProfile().getName())
+        print("\ngenres: ")
+        print(musicMap.getCoreProfile().getGenre())
+        print("\nurl: " , musicMap.getCoreProfile().getURL())
+        print("\nfollowers: ", musicMap.getCoreProfile().getNumFollowers())
 
+        print("\nRelated Artists Music Profiles: ")
+        relationGraph = musicMap.getGraph()
+        for profile in relationGraph.values():
+            print("\nname: " , profile.getName())
+            print("\ngenres: ")
+            print(profile.getGenre())
+            print("\nurl: " , profile.getURL())
+            print("\nfollowers: ", profile.getNumFollowers())
+            print("\n__________________\n")
 
-    context = {}
+    context = {'relationGraph': relationGraph, 'musicMap' : musicMap}
     return render(request, 'musicmap/content.html', context) 
     #Changed html directory from maincontent to base
 
@@ -50,48 +64,48 @@ def blogPosts(request):
 
 
 
-class PostListView(ListView):
-    model = Blog
-    template_name = 'musicmap/blog.html'
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
+# class PostListView(ListView):
+#     model = Blog
+#     template_name = 'musicmap/blog.html'
+#     context_object_name = 'posts'
+#     ordering = ['-date_posted']
 
-class PostDetailView(DetailView):
-    model = Blog
-
-
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Blog
-    fields = ['title', 'content']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+# class PostDetailView(DetailView):
+#     model = Blog
 
 
-class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
-    model = Blog
-    fields = ['title', 'content']
+# class PostCreateView(LoginRequiredMixin, CreateView):
+#     model = Blog
+#     fields = ['title', 'content']
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.instance.author = self.request.user
+#         return super().form_valid(form)
 
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.auther:
-            return True
-        return False
 
-class PostDeleteView(UserPassesTestMixin, UserPassesTestMixin, DeleteView ):
-    model = Blog
-    success_url = '/blog'
+# class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+#     model = Blog
+#     fields = ['title', 'content']
 
-    def test_func(self):
-            post = self.get_object()
-            if self.request.user == post.auther:
-                return True
-            return False
+#     def form_valid(self, form):
+#         form.instance.author = self.request.user
+#         return super().form_valid(form)
+
+#     def test_func(self):
+#         post = self.get_object()
+#         if self.request.user == post.auther:
+#             return True
+#         return False
+
+# class PostDeleteView(UserPassesTestMixin, UserPassesTestMixin, DeleteView ):
+#     model = Blog
+#     success_url = '/blog'
+
+#     def test_func(self):
+#             post = self.get_object()
+#             if self.request.user == post.auther:
+#                 return True
+#             return False
 
 
 

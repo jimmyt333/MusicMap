@@ -8,13 +8,17 @@
 
     <div class= "container" style="text-align:center; ">
       <form class="form-inline my-2 my-lg-0" method="POST">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        {%csrf_token%}
+        <input class="form-control mr-sm-2" name='searchString' type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-100" type="submit">Search</button>
       </form>
     </div>
 
     <div class= "container" style= "margin-top: 150px;">
         <h2 style="text-align: center;">MUSIC MAP HERE</h2>
+        {% for name, profile in relationGraph.items %}
+        <li>{{name}} - {{profile}}</li>
+        {% endfor %}
     </div>
 
     <div class= "container" style="text-align:center; margin-top: 200px;">

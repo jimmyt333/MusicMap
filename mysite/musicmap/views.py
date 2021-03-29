@@ -16,7 +16,8 @@ import json
 
 # Create your views here.
 def index(request):
-
+    musicMap = None
+    relationGraph = None
 
     if request.method == "POST":
 
@@ -57,55 +58,55 @@ def index(request):
     return render(request, 'musicmap/content.html', context) 
     #Changed html directory from maincontent to base
 
-def blogPosts(request):
-    context = {'posts': Blog.objects.all()}
+# def blogPosts(request):
+#     context = {'posts': Blog.objects.all()}
 
-    return render(request, 'musicmap/blog.html', context)
-
-
-
-# class PostListView(ListView):
-#     model = Blog
-#     template_name = 'musicmap/blog.html'
-#     context_object_name = 'posts'
-#     ordering = ['-date_posted']
-
-# class PostDetailView(DetailView):
-#     model = Blog
+#     return render(request, 'musicmap/blog.html', context)
 
 
-# class PostCreateView(LoginRequiredMixin, CreateView):
-#     model = Blog
-#     fields = ['title', 'content']
 
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
+class PostListView(ListView):
+    model = Blog
+    template_name = 'musicmap/blog.html'
+    context_object_name = 'posts'
+    ordering = ['-date_added']
+
+class PostDetailView(DetailView):
+    model = Blog
 
 
-# class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
-#     model = Blog
-#     fields = ['title', 'content']
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Blog
+    fields = ['title', 'content']
 
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-#     def test_func(self):
-#         post = self.get_object()
-#         if self.request.user == post.auther:
-#             return True
-#         return False
 
-# class PostDeleteView(UserPassesTestMixin, UserPassesTestMixin, DeleteView ):
-#     model = Blog
-#     success_url = '/blog'
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+    model = Blog
+    fields = ['title', 'content']
 
-#     def test_func(self):
-#             post = self.get_object()
-#             if self.request.user == post.auther:
-#                 return True
-#             return False
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView ):
+    model = Blog
+    success_url = '/blog'
+
+    def test_func(self):
+            post = self.get_object()
+            if self.request.user == post.author:
+                return True
+            return False
 
 
 

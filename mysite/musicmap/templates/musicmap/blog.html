@@ -6,7 +6,7 @@
 
 <div class = "container">
 
-<form style="margin: 20px;" class="container" method = "POST" action="">
+<!-- <form style="margin: 20px;" class="container" method = "POST" action="">
     {%csrf_token%}
 
 
@@ -27,14 +27,16 @@
 
         <input class="btn btn-primary" type="submit" name="submit post" value="Create Post"> 
 </form>
-  
+   -->
 
 
 
 
+<a class="btn btn-primary btn-sm mt-1 mb-1" style="margin-bottom: 10px;" href="{% url 'post-create' %}">Create New Post</a>
 
 
-    {%for post in posts %}
+
+{%for post in posts %}
 
     <article class="media content-section">
         <div class="media-body">
@@ -42,7 +44,7 @@
             <a class="mr-2" href="#">{{ post.author }}</a>
             <small class="text-muted">{{ post.date_added }}</small>
           </div>
-          <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
           <p class="article-content">{{ post.content }}</p>
         </div>
       </article>

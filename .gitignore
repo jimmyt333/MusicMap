@@ -136,3 +136,5 @@ data.csv
 
 # MacOS Django/Python path settings
 .vscode/settings.json
+Tokens/credentials.json
+runner.py

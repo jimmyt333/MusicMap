@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields import CharField, DateTimeField, TextField
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Blog(models.Model):
     title = CharField(max_length=200)
@@ -8,11 +9,16 @@ class Blog(models.Model):
     content = TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    class Meta():
-        ordering = ['-date_added']
+   
 
     def __str__(self):
-        return self.title
+        return self.title + ' | ' + str(self.author)
+    
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.pk} )
+    
+    
+    
 
 
 

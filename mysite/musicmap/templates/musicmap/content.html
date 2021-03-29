@@ -4,8 +4,19 @@
 
 
 <div class="sidenav">
-    <h2 style="text-align: center;">Search For Artist:</h2>
-    <input id="searchText" style="width:50%; margin: 10px;"/> 
+
+    <form action="" method="POST">
+        {%csrf_token%}
+        <h2 style="text-align: center;">Search For Artist:</h2>
+        <input name = "search" type = "search" placeholder="Type In Artist" style="width:50%; margin: 10px;"/> 
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+    
+    
+    
+    
+    
     <br> <br>
     <h3>Settings/Options</h3>
     <input id="randomsearch" type="checkbox" />

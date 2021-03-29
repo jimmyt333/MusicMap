@@ -4,10 +4,28 @@
 
 
 
+<div class = "container">
+
 <form style="margin: 20px;" class="container" method = "POST" action="">
     {%csrf_token%}
-    {{form}}
-    <input class="btn btn-primary" type="submit" name="submit post" value="Create Post"> 
+
+
+        <div class="mb-3 form-control">
+            <label class="form-label">Title</label>
+            <div>
+                {{form.title}}
+            </div>
+        </div>
+
+        <div class="mb-3 form-control">
+            <label for="exampleInputEmail1" class="form-label">Content</label>
+            <div>
+                {{form.content}}
+            </div>
+
+        </div>
+
+        <input class="btn btn-primary" type="submit" name="submit post" value="Create Post"> 
 </form>
   
 
@@ -16,21 +34,19 @@
 
 
 
-{%for post in posts %}
+    {%for post in posts %}
 
-<div style = "border: 2px solid black; margin: 20px;" class="box container">
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_added }}</small>
+          </div>
+          <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <p class="article-content">{{ post.content }}</p>
+        </div>
+      </article>
 
-    {{post.author}}
-    <br>
-    {{post.title}}
-    <br>
-    {{post.content}}
-
-    <a style = "margin-right: 10px;" class="btn btn-sm btn-primary buttons" href="#">Edit</a>
-    <a style = "margin-right: 10px;" class="btn btn-sm btn-danger buttons" href="#">Delete</a>
-
-    <br>
-</div>
 {%endfor%}
 
 

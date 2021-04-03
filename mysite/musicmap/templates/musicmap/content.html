@@ -14,7 +14,14 @@
       </form>
     </div>
 
-    <div class= "container" style= "margin-top: 100px; padding: 50px; background: rgb(235, 250, 255);">
+    <div class= "container" style="text-align:center; margin-top: 50px; margin-bottom: 50px;">
+      <h4>Settings/Options</h4>
+      <button onclick="">Surprise Me!</button>
+      <button onclick="">Autoplay</button>
+      <button onclick="toggleDarkMode()">Dark Mode Test Button</button>
+  </div>
+
+    <div class= "container" style= "margin-top: 100px; padding: 50p;">
         <h2 style="text-align: center;">MUSIC MAP HERE</h2>
         {% for name, profile in relationGraph.items %}
         <li>{{name}}</li>
@@ -22,20 +29,10 @@
           <li>Spotify Link: {{profile.getURL}}</li>
           <li>Genre: {{profile.getGenre.0}}</li>
           <li>Number of Followers: {{profile.getNumFollowers}}</li>
+          <img src= "{{profile.getImgURL}}" height="250" width="250"></img>
         </ul>
         {% endfor %}
     </div>
-
-    <div class= "container" style="text-align:center; margin-top: 100px; margin-bottom: 100px;">
-        <h3>Settings/Options</h3>
-        <input id="randomsearch" type="checkbox" />
-        <label for="randomsearch">Surprise Me!</label><br>
-        <input id="nightmode" type="checkbox" />
-        <label for="nightmode">Night Mode</label><br>
-        <input id="autoplay" type="checkbox" />
-        <label for="autoplay">Autoplay</label><br>
-        <button class="btn_applysettings" style="margin-top: 10px;">Apply</button>
-    </div>  
 </div>
 
 {%endblock%}

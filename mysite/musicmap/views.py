@@ -37,22 +37,23 @@ def index(request):
         musicMap = spottyClient.createMusicMap(searchString)
         relationGraph = musicMap.getGraph()
 
-        print("\nCore Music Profile: ")
-        print("\n\nname: " , musicMap.getCoreProfile().getName())
-        print("\ngenres: ")
-        print(musicMap.getCoreProfile().getGenre())
-        print("\nurl: " , musicMap.getCoreProfile().getURL())
-        print("\nfollowers: ", musicMap.getCoreProfile().getNumFollowers())
+        # print("\nCore Music Profile: ")
+        # print("\n\nname: " , musicMap.getCoreProfile().getName())
+        # print("\ngenres: ")
+        # print(musicMap.getCoreProfile().getGenre())
+        # print("\nurl: " , musicMap.getCoreProfile().getURL())
+        # print("\nfollowers: ", musicMap.getCoreProfile().getNumFollowers())
+        # print("\nimgurl: " , musicMap.getCoreProfile().getImgURL())
 
-        print("\nRelated Artists Music Profiles: ")
-        relationGraph = musicMap.getGraph()
-        for profile in relationGraph.values():
-            print("\nname: " , profile.getName())
-            print("\ngenres: ")
-            print(profile.getGenre())
-            print("\nurl: " , profile.getURL())
-            print("\nfollowers: ", profile.getNumFollowers())
-            print("\n__________________\n")
+        # print("\nRelated Artists Music Profiles: ")
+        # relationGraph = musicMap.getGraph()
+        # for profile in relationGraph.values():
+        #     print("\nname: " , profile.getName())
+        #     print("\ngenres: ")
+        #     print(profile.getGenre())
+        #     print("\nimgurl: " , profile.getImgURL())
+        #     print("\nfollowers: ", profile.getNumFollowers())
+        #     print("\n__________________\n")
 
     context = {'relationGraph': relationGraph, 'musicMap' : musicMap}
     return render(request, 'musicmap/content.html', context) 

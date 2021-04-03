@@ -1,12 +1,13 @@
 class MusicProfile:
 
     # constructor
-    def __init__(self, name, genre, url, numFollowers):
-        # save name (String), genre (list of Strings), URL (String), number of followers (int)
+    def __init__(self, name, genre, url, numFollowers, imgURL):
+        # save name (String), genre (list of Strings), URL (String), number of followers (int), and image URL (String)
         self.__name = name
         self.__genre = genre
         self.__url = url
         self.__numFollowers = numFollowers
+        self.__imgurl = imgURL
 
     # getter method for music profile name
     def getName(self):
@@ -23,3 +24,7 @@ class MusicProfile:
     # getter method for music profile number of followers
     def getNumFollowers(self):
         return self.__numFollowers
+    
+    # getter method for img URL
+    def getImgURL(self):
+        return self.__imgurl

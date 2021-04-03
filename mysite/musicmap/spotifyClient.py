@@ -81,13 +81,11 @@ class SpotifyClient:
         related_artists = spClient.artist_related_artists(artist['id'])
         
         # create core profile of searched artist
-        coreProfile = MusicProfile(artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'])
+        coreProfile = MusicProfile(artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], artist['images'][0]['url'])
 
         # fill relation graph with MusicProfiles of related artists
         for artist in related_artists['artists']:
-            relationGraph[artist['name']] = MusicProfile(artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'])
-
-        #print(artist)
+            relationGraph[artist['name']] = MusicProfile(artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], artist['images'][0]['url'])
 
         # create and return MusicMap object using coreProfile and relationGraph
         map = MusicMap(coreProfile, relationGraph)

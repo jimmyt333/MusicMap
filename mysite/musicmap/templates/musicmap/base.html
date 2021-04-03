@@ -131,6 +131,24 @@
         font-size: 2.5rem;
         }
 
+        #musicmap{
+          background: linear-gradient(-45deg, #09203F, #537895, #09203F, #537895);
+          background-size: 400% 400%;
+          animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
 
     </style>
   </head>
@@ -206,6 +224,8 @@
         element.classList.toggle("h1, h2, h3, h4, h5, h6.dark-mode");
       }
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" integrity="sha256-qM7QTJSlvtPSxVRjVWNM2OfTAz/3k5ovHOKmKXuYMO4=" crossorigin="anonymous"></script> <!--MusicMap background-->
     {%block content%}
    
 

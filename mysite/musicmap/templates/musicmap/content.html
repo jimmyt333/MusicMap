@@ -30,6 +30,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  border-radius: 25px;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
 }
@@ -61,24 +62,24 @@
 
 
 <div class="container">
-<div class="sidenav" style= "margin-top: 75px;">
-    <h2 style="text-align: center;">Search For Artist:</h2>
+  <div class="sidenav" style= "margin-top: 75px;">
+      <h2 style="text-align: center;">Search For Artist:</h2>
 
-    <div class= "container" style="text-align:center; ">
-      <form class="form-inline my-2 my-lg-0" method="POST">
-        {%csrf_token%}
-        <input class="form-control mr-sm-2" name='searchString' id='txtSearch' type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-100" type="submit">Search</button>
-      </form>
-    </div>
+      <div class= "container" style="text-align:center; ">
+        <form class="form-inline my-2 my-lg-0" method="POST">
+          {%csrf_token%}
+          <input class="form-control mr-sm-2" name='searchString' id='txtSearch' type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-100" type="submit">Search</button>
+        </form>
+      </div>
 
-    <div class= "container" style="text-align:center; margin-top: 50px; margin-bottom: 50px;">
-      <h4>Settings/Options</h4>
-      <button onclick="">Surprise Me!</button>
-      <button onclick="">Autoplay</button>
-      <button onclick="toggleDarkMode()">Dark Mode Test Button</button>
+      <div class= "container" style="text-align:center; margin-top: 50px; margin-bottom: 50px;">
+        <h4>Settings/Options</h4>
+        <button onclick="">Surprise Me!</button>
+        <button onclick="">Autoplay</button>
+        <button onclick="toggleDarkMode()">Dark Mode Test Button</button>
+      </div>
   </div>
-</div>
 
 
 
@@ -97,26 +98,26 @@
         {% endfor %}
     </div> -->
 
-    <div class="container">
+    <div class="container" id="musicmap" style="margin: 0 auto; width: 100%; border-radius: 15px;">
       <div class = "row">
         {% for name, profile in relationGraph.items %}
 
-        <div class="flip-card" style="margin: 25px; height:300px; width: 300px;" >
-            <div class="flip-card-inner">
+        <div class="flip-card" style="margin: 25px; padding-left: 110px; height:300px; width: 300px;" >
+            <div class="flip-card-inner" style="width: inherit;">
               <div class="flip-card-front">
-                <img src="{{profile.getImgURL}}" alt="Avatar" style="width:300px;height:300px;">
+                <img src="{{profile.getImgURL}}" alt="Avatar" style="width:300px;height:300px;border-radius:25px;">
               </div>
               <div class="flip-card-back">
                 <h1>{{name}}</h1>
-                <p>{{profile.getGenre.0}}</p>
+                <p>{{profile.getGenre.0.upper}}</p>
               </div>
             </div>
-          </div>
-          {% endfor %}
+        </div>
+        {% endfor %}
 
       </div>
     </div>
-  </div>
+</div>
 
 
 

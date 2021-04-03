@@ -108,8 +108,10 @@
                 <img src="{{profile.getImgURL}}" alt="Avatar" style="width:300px;height:300px;border-radius:25px;">
               </div>
               <div class="flip-card-back">
-                <h1>{{name}}</h1>
-                <p>{{profile.getGenre.0.upper}}</p>
+                <h1 style= "margin-top: 25px;">{{name}}</h1>
+                <p style= "margin-top: 15px;">{{profile.getGenre.0.upper}}</p>
+                <p style= "margin-top: 15px;"># of Spotify Followers: {{profile.getNumFollowers}}</p>
+                <button style= "margin-top: 10px;" onclick="document.location='{{profile.getURL}}'" type="button" class="btn btn-outline-success">Spotify Link</button>
               </div>
             </div>
         </div>

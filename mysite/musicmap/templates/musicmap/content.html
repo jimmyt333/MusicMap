@@ -105,6 +105,8 @@
     id="musicmap"
     style="margin: 0 auto; width: 100%; border-radius: 15px"
   >
+    <!-- Core Profile -->
+    {%if musicMap%}
     <div
       class="flip-card"
       style="margin: 25px; padding-left: 450px; height: 300px; width: 300px"
@@ -136,7 +138,9 @@
         </div>
       </div>
     </div>
+    {%endif%}
 
+    <!-- Related Artists Profiles -->
     <div class="row">
       {% for name, profile in relationGraph.items %}
 

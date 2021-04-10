@@ -160,6 +160,19 @@
             >
               Spotify Link
             </button>
+
+            <form method="GET">
+              {%csrf_token%}
+              <button
+                name="artist_musicMap"
+                style="margin-top: 10px"
+                type="submit"
+                value="{{profile.getName}}"
+                class="btn btn-outline-success"
+              >
+                Artist MusicMap
+              </button>
+            </form>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.fields import CharField, DateTimeField, TextField
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.urls import reverse
 
 class Blog(models.Model):
@@ -8,6 +8,7 @@ class Blog(models.Model):
     date_added = DateTimeField(auto_now=True)
     content = TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True,on_delete=models.CASCADE)
 
    
 
@@ -16,6 +17,21 @@ class Blog(models.Model):
     
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk} )
+
+class BlogResponse(models.Model):
+    date_added = DateTimeField(auto_now=True)
+    content = TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True,on_delete=models.CASCADE)
+   
+
+    def __str__(self):
+        return self.content + ' | ' + str(self.blog)
+    
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.pk} )
+
     
     
     

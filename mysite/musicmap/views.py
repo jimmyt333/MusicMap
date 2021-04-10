@@ -20,9 +20,7 @@ def index(request):
     relationGraph = None
 
     if request.method == "POST":
-
         searchString = request.POST.get('searchString')
-
         # open credentials json and read api keys
         with open('musicmap/Tokens/credentials.json') as tokens:
             keys = json.load(tokens)
@@ -37,33 +35,29 @@ def index(request):
         musicMap = spottyClient.createMusicMap(searchString)
         relationGraph = musicMap.getGraph()
 
-        # print("\nCore Music Profile: ")
-        # print("\n\nname: " , musicMap.getCoreProfile().getName())
-        # print("\ngenres: ")
-        # print(musicMap.getCoreProfile().getGenre())
-        # print("\nurl: " , musicMap.getCoreProfile().getURL())
-        # print("\nfollowers: ", musicMap.getCoreProfile().getNumFollowers())
-        # print("\nimgurl: " , musicMap.getCoreProfile().getImgURL())
+    elif request.method == "GET" and 'artist_musicMap' in request.GET:
+        
+        searchString = str(request.GET.get('artist_musicMap'))
+            
+        # open credentials json and read api keys
+        with open('musicmap/Tokens/credentials.json') as tokens:
+            keys = json.load(tokens)
 
-        # print("\nRelated Artists Music Profiles: ")
-        # relationGraph = musicMap.getGraph()
-        # for profile in relationGraph.values():
-        #     print("\nname: " , profile.getName())
-        #     print("\ngenres: ")
-        #     print(profile.getGenre())
-        #     print("\nimgurl: " , profile.getImgURL())
-        #     print("\nfollowers: ", profile.getNumFollowers())
-        #     print("\n__________________\n")
+        # connect to Spotify API
+        client_id = keys["client_Id"]
+        client_secret = keys["client_secret"]
 
+        # create spotifyClient object
+        spottyClient = SpotifyClient(client_id, client_secret)
+
+        musicMap = spottyClient.createMusicMap(searchString)
+        relationGraph = musicMap.getGraph()
+
+
+       
     context = {'relationGraph': relationGraph, 'musicMap' : musicMap}
     return render(request, 'musicmap/content.html', context) 
-    #Changed html directory from maincontent to base
-
-# def blogPosts(request):
-#     context = {'posts': Blog.objects.all()}
-
-#     return render(request, 'musicmap/blog.html', context)
-
+ 
 
 
 class PostListView(ListView):

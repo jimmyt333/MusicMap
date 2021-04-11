@@ -154,17 +154,18 @@
             <p style="margin-top: 15px">
               # of Spotify Followers: {{profile.getNumFollowers}}
             </p>
-            <!-- <button
+            <button
+              id="spotButton"
               style="margin-top: 10px"
-              onclick="document.location='{{profile.getURL}}'"
+              value="{{profile.getURL}}"
+              onclick="linkToMap(this.value);"
               type="button"
               class="btn btn-outline-success"
-              
             >
               Spotify Link
-            </button> -->
+            </button>
 
-           <a href="{{profile.getURL}}" style="margin-top: 10px; color: white;"  target="_blank"> Spotify Link</a></p>
+           <!-- <a href="{{profile.getURL}}" style="margin-top: 10px; color: white;"  target="_blank"> Spotify Link</a></p> -->
             
 
             <form method="GET">

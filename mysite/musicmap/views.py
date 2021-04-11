@@ -15,7 +15,7 @@ import json
 
 
 # Create your views here.
-def index(request):
+def index(request):     
     musicMap = None
     relationGraph = None
 

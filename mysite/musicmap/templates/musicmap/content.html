@@ -99,17 +99,17 @@
     {%if musicMap%}
     <div
       class="flip-card"
-      style="margin: 25px; padding-left: 450px; height: 300px; width: 300px"
+      style="margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 45px; padding-left: 460px;  height: 300px; width: 300px"
     >
-      <div class="flip-card-inner" style="width: inherit">
-        <div class="flip-card-front">
+      <div class="flip-card-inner" style="width: inherit; ">
+        <div class="flip-card-front" style="margin-top: 30px;">
           <img
             src="{{musicMap.getCoreProfile.getImgURL}}"
             alt="Avatar"
             style="width: 300px; height: 300px; border-radius: 25px"
           />
         </div>
-        <div class="flip-card-back">
+        <div class="flip-card-back" style="margin-top: 30px; "   >
           <h1 style="margin-top: 25px">{{musicMap.getCoreProfile.getName}}</h1>
           <p style="margin-top: 15px">
             {{musicMap.getCoreProfile.getGenre.0.upper}}
@@ -117,14 +117,16 @@
           <p style="margin-top: 15px">
             # of Spotify Followers: {{musicMap.getCoreProfile.getNumFollowers}}
           </p>
-          <button
+          <a href="{{musicMap.getCoreProfile.getURL}}" style="margin-top: 10px; color: white;"  target="_blank"> Spotify Link</a></p>
+
+          <!-- <button
             style="margin-top: 10px"
             onclick="document.location='{{musicMap.getCoreProfile.getURL}}'"
             type="button"
             class="btn btn-outline-success"
           >
             Spotify Link
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -136,7 +138,7 @@
 
       <div
         class="flip-card"
-        style="margin: 25px; padding-left: 110px; height: 300px; width: 300px"
+        style="margin: 25px; padding-left: 120px; height: 300px; width: 300px"
       >
         <div class="flip-card-inner" style="width: inherit">
           <div class="flip-card-front">
@@ -152,14 +154,18 @@
             <p style="margin-top: 15px">
               # of Spotify Followers: {{profile.getNumFollowers}}
             </p>
-            <button
+            <!-- <button
               style="margin-top: 10px"
               onclick="document.location='{{profile.getURL}}'"
               type="button"
               class="btn btn-outline-success"
+              
             >
               Spotify Link
-            </button>
+            </button> -->
+
+           <a href="{{profile.getURL}}" style="margin-top: 10px; color: white;"  target="_blank"> Spotify Link</a></p>
+            
 
             <form method="GET">
               {%csrf_token%}

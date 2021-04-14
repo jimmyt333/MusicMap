@@ -138,3 +138,17 @@ data.csv
 .vscode/settings.json
 runner.py
 mysite/musicmap/Tokens/credentials.json
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

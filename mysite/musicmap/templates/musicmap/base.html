@@ -45,7 +45,7 @@
 
       .dark-mode {
         /* background-color: #333333; */
-        background: url("/static/images/dark-bg.png") no-repeat;
+        background: url("{% static 'images/dark-bg.png' %}") no-repeat;
         background-size: cover;
         color: white;
       }
@@ -64,7 +64,7 @@
 
       body {
         /* background: #fafafa; */
-        background: url("/static/images/light-bg.png") no-repeat;
+        background: url("{% static 'images/light-bg.png' %}") no-repeat;
         background-size: cover;
         color: #000000;
         -webkit-backface-visibility: hidden; /* Safari */

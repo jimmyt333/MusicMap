@@ -1,3 +1,4 @@
+from mysite.settings import SPOTIFY_CREDENTIALS
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from .models import *
@@ -22,7 +23,7 @@ def index(request):
     if request.method == "POST":
         searchString = request.POST.get('searchString')
         # open credentials json and read api keys
-        with open('musicmap/Tokens/credentials.json') as tokens:
+        with open(SPOTIFY_CREDENTIALS + 'credentials.json') as tokens:
             keys = json.load(tokens)
 
         # connect to Spotify API
@@ -40,7 +41,7 @@ def index(request):
         searchString = str(request.GET.get('artist_musicMap'))
             
         # open credentials json and read api keys
-        with open('musicmap/Tokens/credentials.json') as tokens:
+        with open(SPOTIFY_CREDENTIALS + 'credentials.json') as tokens:
             keys = json.load(tokens)
 
         # connect to Spotify API

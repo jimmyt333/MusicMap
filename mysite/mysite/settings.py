@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+SPOTIFY_CREDENTIALS = os.path.join(PROJECT_ROOT, 'musicmap/Tokens/')
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +27,7 @@ SECRET_KEY = 'tbulz17b&!mve&+c8&xb@zpc22f&xi(mj^2w(+f-=#ya4^pue)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-env.eba-8ugbktfp.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
@@ -123,5 +125,6 @@ SESSION_COOKIE_AGE = 3600
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
+    '/static/images/'
 ] # Changed from squiggly brackets '{}' to hard brackets '[]' as I was getting an error for CSS for finding the directory

@@ -117,8 +117,7 @@
           <p style="margin-top: 15px">
             # of Spotify Followers: {{musicMap.getCoreProfile.getNumFollowers}}
           </p>
-          <a href="{{musicMap.getCoreProfile.getURL}}" style="margin-top: 10px; color: white;"  target="_blank"> Spotify Link</a></p>
-
+          <button value="{{musicMap.getCoreProfile.getURL}}" onclick="linkToMap(this.value);" style="margin-top: 10px; color: white;" id="spotButton" class="btn btn-outline-success"> Spotify Link</button></p>
           <!-- <button
             style="margin-top: 10px"
             onclick="document.location='{{musicMap.getCoreProfile.getURL}}'"

@@ -1,0 +1,59 @@
+{%extends "musicmap/base.html"%}
+{%load static%}
+{%block content%}
+
+
+
+<div class = "container">
+
+<!-- <form style="margin: 20px;" class="container" method = "POST" action="">
+    {%csrf_token%}
+
+
+        <div class="mb-3 form-control">
+            <label class="form-label">Title</label>
+            <div>
+                {{form.title}}
+            </div>
+        </div>
+
+        <div class="mb-3 form-control">
+            <label for="exampleInputEmail1" class="form-label">Content</label>
+            <div>
+                {{form.content}}
+            </div>
+
+        </div>
+
+        <input class="btn btn-primary" type="submit" name="submit post" value="Create Post"> 
+</form>
+   -->
+
+
+
+
+<a class="btn btn-primary btn-sm mt-1 mb-1" style="margin-bottom: 10px;" href="{% url 'post-create' %}">Create New Post</a>
+
+
+
+{%for post in posts %}
+
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_added }}</small>
+          </div>
+          <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+          <p class="article-content">{{ post.content }}</p>
+        </div>
+      </article>
+
+{%endfor%}
+
+<button onclick="toggleDarkMode()">Dark Mode Test Button</button>
+
+
+
+
+{%endblock%}

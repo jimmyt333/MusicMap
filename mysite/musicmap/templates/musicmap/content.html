@@ -1,0 +1,201 @@
+{%extends "musicmap/base.html"%} {%load static%} {%block content%}
+
+<style>
+  .flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 200px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Position the front and back side */
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  /* Style the front side (fallback if image is missing) */
+  .flip-card-front {
+    background-color: #bbb;
+    color: black;
+  }
+
+  /* Style the back side */
+  .flip-card-back {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(9, 9, 121, 1) 35%,
+      rgba(0, 212, 255, 1) 100%
+    );
+    color: white;
+    transform: rotateY(180deg);
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  }
+</style>
+
+<div class="container">
+  <div class="sidenav" style="margin-top: 75px">
+    <h2 style="text-align: center">Search For Artist:</h2>
+
+    <div class="container" style="text-align: center">
+      <form id="”search”" class="form-inline my-2 my-lg-0" method="POST">
+        {%csrf_token%}
+        <input
+          class="form-control mr-sm-2"
+          name="searchString"
+          id="txtSearch"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-dark my-2 my-sm-100" type="submit">
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- <div class= "container" style= "margin-top: 100px; padding: 50p;">
+        <h2 style="text-align: center;">MUSIC MAP HERE</h2>
+        {% for name, profile in relationGraph.items %}
+        <li>{{name}}</li>
+        <ul>
+          <li>Spotify Link: {{profile.getURL}}</li>
+          <li>Genre: {{profile.getGenre.0}}</li>
+          <li>Number of Followers: {{profile.getNumFollowers}}</li>
+          <img src= "{{profile.getImgURL}}" height="250" width="250"></img>
+        </ul>
+        {% endfor %}
+    </div> -->
+
+  <div
+    class="container"
+    id="musicmap"
+    style="margin: 0 auto; width: 100%; border-radius: 15px"
+  >
+    <!-- Core Profile -->
+    {%if musicMap%}
+    <div
+      class="flip-card"
+      style="margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 45px; padding-left: 460px;  height: 300px; width: 300px"
+    >
+      <div class="flip-card-inner" style="width: inherit; ">
+        <div class="flip-card-front" style="margin-top: 30px;">
+          <img
+            src="{{musicMap.getCoreProfile.getImgURL}}"
+            alt="Avatar"
+            style="width: 300px; height: 300px; border-radius: 25px"
+          />
+        </div>
+        <div class="flip-card-back" style="margin-top: 30px; "   >
+          <h1 style="margin-top: 25px">{{musicMap.getCoreProfile.getName}}</h1>
+          <p style="margin-top: 15px">
+            {{musicMap.getCoreProfile.getGenre.0.upper}}
+          </p>
+          <p style="margin-top: 15px">
+            # of Spotify Followers: {{musicMap.getCoreProfile.getNumFollowers}}
+          </p>
+          <a href="{{musicMap.getCoreProfile.getURL}}" style="margin-top: 10px; color: white;"  target="_blank"> Spotify Link</a></p>
+
+          <!-- <button
+            style="margin-top: 10px"
+            onclick="document.location='{{musicMap.getCoreProfile.getURL}}'"
+            type="button"
+            class="btn btn-outline-success"
+          >
+            Spotify Link
+          </button> -->
+        </div>
+      </div>
+    </div>
+    {%endif%}
+
+    <!-- Related Artists Profiles -->
+    <div class="row">
+      {% for name, profile in relationGraph.items %}
+
+      <div
+        class="flip-card"
+        style="margin: 25px; padding-left: 120px; height: 300px; width: 300px"
+      >
+        <div class="flip-card-inner" style="width: inherit">
+          <div class="flip-card-front">
+            <img
+              src="{{profile.getImgURL}}"
+              alt="Avatar"
+              style="width: 300px; height: 300px; border-radius: 25px"
+            />
+          </div>
+          <div class="flip-card-back">
+            <h1 style="margin-top: 25px">{{name}}</h1>
+            <p style="margin-top: 15px">{{profile.getGenre.0.upper}}</p>
+            <p style="margin-top: 15px">
+              # of Spotify Followers: {{profile.getNumFollowers}}
+            </p>
+            <button
+              id="spotButton"
+              style="margin-top: 10px"
+              value="{{profile.getURL}}"
+              onclick="linkToMap(this.value);"
+              type="button"
+              class="btn btn-outline-success"
+            >
+              Spotify Link
+            </button>
+
+           <!-- <a href="{{profile.getURL}}" style="margin-top: 10px; color: white;"  target="_blank"> Spotify Link</a></p> -->
+            
+
+            <form method="GET">
+              {%csrf_token%}
+              <button
+                name="artist_musicMap"
+                style="margin-top: 10px"
+                type="submit"
+                value="{{profile.getName}}"
+                class="btn btn-outline-success"
+              >
+                Artist MusicMap
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div
+    class="container"
+    style="text-align: center; margin-top: 50px; margin-bottom: 50px"
+  >
+    <!-- <h4>Settings/Options</h4> -->
+    <!-- <button onclick="">Surprise Me!</button>
+      <button onclick="">Autoplay</button> -->
+    <button onclick="toggleDarkMode()">Dark Mode Test Button</button>
+  </div>
+</div>
+
+{%endblock%}

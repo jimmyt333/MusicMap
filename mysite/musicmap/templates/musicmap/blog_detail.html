@@ -19,12 +19,43 @@
         <p class="article-content">{{ object.content }}</p>
       </div>
     </article>
+
+    <br> <br>
+
+    <h1>Comments</h1>
+
+    {%if not object.comments.all%}
+      <h3>No comments yet</h3>
+    {%else%}
+
+    {%endif%}
+
+    
+
+
+    {%for comment in object.comments.all %}
+
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ comment.author }}</a>
+            <small class="text-muted">{{ comment.date_posted|date:"F d, Y" }}</small>
+            {% if comment.author == user %}
+              <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-edit' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+              </div>
+            {% endif %}
+          </div>
+          <h2 class="article-title">{{ comment.title }}</h2>
+          <p class="article-content">{{ comment.content }}</p>
+        </div>
+      </article>
+
+    {%endfor%}
+
+
+
   </div>
-
-
-
-
-
-
 
 {% endblock content %}

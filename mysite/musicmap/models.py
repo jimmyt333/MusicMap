@@ -8,7 +8,6 @@ class Blog(models.Model):
     date_added = DateTimeField(auto_now=True)
     content = TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    parent = models.ForeignKey('self', null=True,on_delete=models.CASCADE)
 
    
 
@@ -18,12 +17,11 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk} )
 
-class BlogResponse(models.Model):
+class Comment(models.Model):
     date_added = DateTimeField(auto_now=True)
     content = TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    parent = models.ForeignKey('self', null=True,on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
    
 
     def __str__(self):

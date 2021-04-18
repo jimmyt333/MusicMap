@@ -2,30 +2,30 @@
 {%load static%}
 {%block content%}
 
+<div class="container">
+    <form style="margin: 20px;" class="container" method = "POST" action="">
+        {%csrf_token%}
 
-<form style="margin: 20px;" class="container" method = "POST" action="">
-    {%csrf_token%}
 
-
-        <div class="mb-3 form-control">
-            <label class="form-label">Title</label>
-            <div>
-                {{form.title}}
-            </div>
-        </div>
-
-        <div class="mb-3 form-control">
-            <label for="exampleInputEmail1" class="form-label">Content</label>
-            <div>
-                {{form.content}}
+            <div class="mb-3 form-control">
+                <label class="form-label">Title</label>
+                <div>
+                    {{form.title}}
+                </div>
             </div>
 
-        </div>
+            <div class="mb-3 form-control">
+                <label for="exampleInputEmail1" class="form-label">Content</label>
+                <div>
+                    {{form.content}}
+                </div>
 
-        <input class="btn btn-primary" type="submit" name="submit post" value="Create Post"> 
-</form>
+            </div>
 
+            <input class="btn btn-primary" type="submit" name="submit post" value="Create Post"> 
+    </form>
 
+</div>
 
 
 {%endblock%}

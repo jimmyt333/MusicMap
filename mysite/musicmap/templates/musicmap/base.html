@@ -226,7 +226,17 @@
       <span style="color: white; margin-right: 5px"
         >Hello, {{request.user}}</span
       >
+      {% if user.is_authenticated %}
+
       <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+
+      {%else%}
+      <span><a class="hello-msg" href="{% url 'login' %}">Login</a></span>
+
+      {%endif%}
+
+
+
     </nav>
 
     <main role="main" class="container">

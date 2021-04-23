@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = str(Path(__file__).resolve().parent.parent)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 SPOTIFY_CREDENTIALS = os.path.join(PROJECT_ROOT, 'musicmap/Tokens/')
 
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR + 'db.sqlite3',
     }
 }
 
@@ -123,8 +123,9 @@ SESSION_COOKIE_AGE = 3600
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = "static"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    '/static/images/'
+    'static/images/'
 ] # Changed from squiggly brackets '{}' to hard brackets '[]' as I was getting an error for CSS for finding the directory

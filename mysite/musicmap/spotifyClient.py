@@ -73,19 +73,27 @@ class SpotifyClient:
         results = self.__getSearchResults(searchString)
         items = results['artists']['items']
 
+        # if artist given has no items, return Drake as default
+        if(not items or not searchString):
+            # results = self.__getSearchResults("Drake")
+            # items = results['artists']['items']
+            return None
+
         # takes 1st result
         artist = items[0]
 
         # get dict of related artists
         spClient = self.getSpotClient()
         related_artists = spClient.artist_related_artists(artist['id'])
-        
+
         # create core profile of searched artist
-        coreProfile = MusicProfile(artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], artist['images'][0]['url'])
+        coreProfile = MusicProfile(artist['name'], artist['genres'], artist['external_urls']
+                                ['spotify'], artist['followers']['total'], artist['images'][0]['url'])
 
         # fill relation graph with MusicProfiles of related artists
         for artist in related_artists['artists']:
-            relationGraph[artist['name']] = MusicProfile(artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], artist['images'][0]['url'])
+            relationGraph[artist['name']] = MusicProfile(
+                artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], artist['images'][0]['url'])
 
         # create and return MusicMap object using coreProfile and relationGraph
         map = MusicMap(coreProfile, relationGraph)

@@ -129,7 +129,6 @@
         </div>
       </div>
     </div>
-    {%endif%}
 
     <!-- Related Artists Profiles -->
     <div class="row">
@@ -137,6 +136,7 @@
 
       <div
         class="flip-card"
+        id="flip-card"
         style="margin: 25px; padding-left: 120px; height: 300px; width: 300px"
       >
         <div class="flip-card-inner" style="width: inherit">
@@ -148,7 +148,7 @@
             />
           </div>
           <div class="flip-card-back">
-            <h1 style="margin-top: 25px">{{name}}</h1>
+            <h1 id="related_artist_name" style="margin-top: 25px">{{name}}</h1>
             <p style="margin-top: 15px">{{profile.getGenre.0.upper}}</p>
             <p style="margin-top: 15px">
               # of Spotify Followers: {{profile.getNumFollowers}}
@@ -183,8 +183,21 @@
         </div>
       </div>
       {% endfor %}
+      <img
+        src="/static/images/file-music.svg"
+        alt="Avatar"
+        style="width: 300px; height: 300px; border-radius: 25px; margin-left: 150px; margin-top: 25px;"
+      />
     </div>
+    {%endif%}
   </div>
+
+  {%if not musicMap and errorFlag == 1%}
+  <div class="alert alert-info alert-dismissible fade show">
+    <button onclick="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+    <strong>{{errorMsg}}</strong>
+  </div>
+  {%endif%}
 
   <div
     class="container"
@@ -193,8 +206,26 @@
     <!-- <h4>Settings/Options</h4> -->
     <!-- <button onclick="">Surprise Me!</button>
       <button onclick="">Autoplay</button> -->
-    <button onclick="toggleDarkMode()">Dark Mode Test Button</button>
+    <button onclick="toggleDarkMode()">Dark Mode</button>
   </div>
 </div>
+
+<body>
+<!--Dynamic Font Size for Long Artist Names-->
+<script>
+  for (i = 0; i < 21; i++) {
+    var $quote = document.getElementsByClassName("flip-card-back")[i];
+    var $numWords = $quote.getElementsByTagName("h1")[0].innerHTML.length; 
+
+    if ($numWords > 10){
+      $quote.getElementsByTagName("h1")[0].style.fontSize = "28px";
+    }
+  }
+
+  function closeAlert(){
+    $('.alert').alert('close');
+  }
+</script>
+</body>
 
 {%endblock%}

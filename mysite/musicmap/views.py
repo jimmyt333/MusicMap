@@ -16,7 +16,7 @@ import json
 
 
 # Create your views here.
-def index(request):     
+def index(request):
     musicMap = None
     relationGraph = None
 
@@ -34,12 +34,21 @@ def index(request):
         spottyClient = SpotifyClient(client_id, client_secret)
 
         musicMap = spottyClient.createMusicMap(searchString)
-        relationGraph = musicMap.getGraph()
+
+        # check if searchString is valid
+        if(musicMap):
+            relationGraph = musicMap.getGraph()
+        else:
+            errorMsg = "Please enter a valid artist name."
+            relationGraph = None
+            context = {'relationGraph': relationGraph,
+                    'musicMap': musicMap, 'errorMsg': errorMsg, 'errorFlag': 1}
+            return render(request, 'musicmap/content.html', context)
 
     elif request.method == "GET" and 'artist_musicMap' in request.GET:
-        
+
         searchString = str(request.GET.get('artist_musicMap'))
-            
+
         # open credentials json and read api keys
         with open(SPOTIFY_CREDENTIALS + 'credentials.json') as tokens:
             keys = json.load(tokens)
@@ -54,10 +63,9 @@ def index(request):
         musicMap = spottyClient.createMusicMap(searchString)
         relationGraph = musicMap.getGraph()
 
-
-       
-    context = {'relationGraph': relationGraph, 'musicMap' : musicMap}
-    return render(request, 'musicmap/content.html', context) 
+    context = {'relationGraph': relationGraph,
+            'musicMap': musicMap, 'errorFlag': 0}
+    return render(request, 'musicmap/content.html', context)
  
 
 

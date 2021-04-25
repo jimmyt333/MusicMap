@@ -24,16 +24,14 @@
 
     <div>
       <h1>Comments</h1>
-      <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'add_comment' object.pk %}">Create New Comment</a>
-      <br>
     </div>
 
     {%if not object.comments.all%}
       <h3>No comments yet</h3>
-    {%else%}
 
     {%endif%}
-
+    <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'add_comment' object.pk %}">Create New Comment</a>
+    <br>
     
 
 

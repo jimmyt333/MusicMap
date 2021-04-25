@@ -1,3 +1,4 @@
+{%extends "musicmap/base.html"%}
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <body>
-
-    <div class="container">
+    {% block nav %} {% endblock %}
+    {% block content %}
+    <div class="container" id="register-form">
         <h1 style="margin-left: 10px;">Register For Music Map!</h1>
 
         <form method="POST">
@@ -65,6 +67,7 @@
         
         </form>
     </div>
+    {% endblock %}
 
 
 </form>

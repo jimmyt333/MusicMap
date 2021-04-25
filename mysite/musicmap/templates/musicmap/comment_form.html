@@ -1,0 +1,31 @@
+{%extends "musicmap/base.html"%}
+{%load static%}
+{%block content%}
+
+<div class="container">
+
+
+    
+
+
+    <h1>Comment</h1>
+    <br>
+    <form style="margin: 20px;" class="container" method = "POST" action="">
+        {%csrf_token%}
+
+
+            <div class="mb-3 form-control">
+                <label for="exampleInputEmail1" class="form-label">Content</label>
+                <div>
+                    {{form.content}}
+                </div>
+
+            </div>
+
+            <input class="btn btn-primary" type="submit" name="submit post" value="Create Comment"> 
+    </form>
+
+</div>
+
+
+{%endblock%}

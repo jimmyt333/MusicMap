@@ -1,0 +1,26 @@
+{%extends "musicmap/base.html"%}
+{%load static%}
+{%block content%}
+
+<div class="container">
+
+<form style="margin: 20px;" class="container" method = "POST" action="">
+    {%csrf_token%}
+
+
+        <div class="mb-3 form-control">
+            <label class="form-label">Title</label>
+            <div>
+                {{object.content}}
+            </div>
+        </div>
+
+        <input class="btn btn-danger" type="submit" name="Delete Comment" value="Delete Comment"> 
+        <input class="btn btn-primary" href = "{% url 'post-detail' object.id}" name="Cancel" value="Cancel"> 
+
+</form>
+
+</div>
+
+
+{%endblock%}

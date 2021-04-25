@@ -92,8 +92,12 @@ class SpotifyClient:
 
         # fill relation graph with MusicProfiles of related artists
         for artist in related_artists['artists']:
-            relationGraph[artist['name']] = MusicProfile(
-                artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], artist['images'][0]['url'])
+            if artist['images']:
+                relationGraph[artist['name']] = MusicProfile(
+                    artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], artist['images'][0]['url'])
+            else:
+                relationGraph[artist['name']] = MusicProfile(
+                    artist['name'], artist['genres'], artist['external_urls']['spotify'], artist['followers']['total'], "static/file-spotify-logo-png-4.png")
 
         # create and return MusicMap object using coreProfile and relationGraph
         map = MusicMap(coreProfile, relationGraph)

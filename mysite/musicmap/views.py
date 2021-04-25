@@ -2,7 +2,7 @@ from mysite.settings import SPOTIFY_CREDENTIALS
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from .models import *
-from .forms import BlogForm, CreateUserForm
+from .forms import BlogForm, CreateUserForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -84,7 +84,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     fields = ['title', 'content']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.author = self.request.user        
         return super().form_valid(form)
 
 
@@ -111,6 +111,69 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView ):
             if self.request.user == post.author:
                 return True
             return False
+
+
+
+
+
+class AddCommentView(LoginRequiredMixin, CreateView):
+    model = Comment
+    template_name = 'musicmap/comment_form.html'
+    form_class = CommentForm
+    success_url = '/blog'
+    ordered_tasks = Comment.objects.order_by('-date_added')
+
+    
+    def form_valid(self, form):
+
+        form.instance.blog_id = self.kwargs['pk'] 
+        form.instance.author = self.request.user        
+        return super().form_valid(form)
+
+
+class EditCommentView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+    model = Comment
+    fields = ['content']
+    success_url = '/blog'
+
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.blog_id = self.kwargs['pk'] 
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView ):
+    model = Comment
+    success_url = '/blog'
+
+    def test_func(self):
+            post = self.get_object()
+            if self.request.user == post.author:
+                return True
+            return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

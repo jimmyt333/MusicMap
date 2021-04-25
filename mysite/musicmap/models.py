@@ -18,7 +18,7 @@ class Blog(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk} )
 
 class Comment(models.Model):
-    date_added = DateTimeField(auto_now=True)
+    date_added = DateTimeField(auto_now_add=True)
     content = TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
@@ -29,6 +29,9 @@ class Comment(models.Model):
     
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk} )
+
+    class Meta:
+       ordering = ['-date_added']
 
     
     
